@@ -29,11 +29,18 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="pgW-oE-WwO">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="mVi-rr-tcH">
-                            <connections>
-                                <action selector="cameraTapped:" destination="BYZ-38-t0r" id="aVx-Al-mJs"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="camera" id="mVi-rr-tcH">
+                                <connections>
+                                    <action selector="cameraTapped:" destination="BYZ-38-t0r" id="aVx-Al-mJs"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="photo.on.rectangle" catalog="system" id="KF4-jA-VWL">
+                                <connections>
+                                    <action selector="photoTapped:" destination="BYZ-38-t0r" id="t2o-cx-BzV"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="uc8-Di-Wte" id="AsI-bs-6Gx"/>
@@ -62,4 +69,7 @@
             <point key="canvasLocation" x="131.8840579710145" y="138.61607142857142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="photo.on.rectangle" catalog="system" width="64" height="48"/>
+    </resources>
 </document>

@@ -15,6 +15,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var imageView: UIImageView!
     
     let imagePicker = UIImagePickerController()
+    let photoPicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
         imagePicker.allowsEditing = false //true if you want to allow image editing
+        
+        photoPicker.delegate = self
+        photoPicker.sourceType = .photoLibrary
+        photoPicker.allowsEditing = false //true if you want to allow image editing
         
     }
     
@@ -37,5 +42,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         present(imagePicker, animated: true, completion: nil)
         
+    }
+    @IBAction func photoTapped(_ sender: UIBarButtonItem) {
+        present(photoPicker, animated: true, completion: nil)
     }
 }
