@@ -15,19 +15,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var imageView: UIImageView!
     
     let imagePicker = UIImagePickerController()
-    let photoPicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imagePicker.delegate = self
-        imagePicker.sourceType = .camera
         imagePicker.allowsEditing = false //true if you want to allow image editing
-        
-        photoPicker.delegate = self
-        photoPicker.sourceType = .photoLibrary
-        photoPicker.allowsEditing = false //true if you want to allow image editing
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -54,9 +47,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             guard let results = request.results as? [VNClassificationObservation] else {
                 fatalError("Model failed to process image.")
             }
-         print(results)
+            
+            if let firstResult = results.first {
+                if firstResult.identifier.contains("hotdog") {
+                    self.navigationItem.title = "Hot Dog 🌭"
+                } else {
+                    self.navigationItem.title = "Not Hot Dog 😔"
+                }
+            }
         }
-        
         let handler = VNImageRequestHandler(ciImage: image)
         
         do {
@@ -64,15 +63,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         } catch {
             print(error.localizedDescription)
         }
-        
     }
     
     @IBAction func cameraTapped(_ sender: UIBarButtonItem) {
         
+        imagePicker.sourceType = .camera
         present(imagePicker, animated: true, completion: nil)
-        
     }
+    
     @IBAction func photoTapped(_ sender: UIBarButtonItem) {
-        present(photoPicker, animated: true, completion: nil)
+        
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
     }
 }
